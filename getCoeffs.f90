@@ -77,8 +77,8 @@ program get_coeffs
   real(cp), allocatable :: g(:), gt(:,:), tknts(:), spl(:)
   real(cp), allocatable :: times(:), g_out(:,:), h_out(:,:)
   integer, allocatable :: degrees(:), orders(:)
-  character(len=*), parameter :: model_file = 'GGF100k'
-  character(len=*), parameter :: out_file   = 'GGF100k_coefs.h5'
+  character(len=*), parameter :: model_file = 'data/GGF100k'
+  character(len=*), parameter :: out_file   = 'data/GGF100k_coefs.h5'
 
   ! HDF5 identifiers
   integer(hid_t) :: file_id, dspace_id, dset_id
@@ -100,7 +100,7 @@ program get_coeffs
 
   ! ---- build time array (500 equally spaced points) ----
   dt = 200.0_cp
-  ntimes = (t_end - t_start) / dt + 1
+  ntimes = int((t_end - t_start) / dt) + 1
   allocate(times(ntimes))
   do it = 1, ntimes
     times(it) = t_start + real(it - 1, cp) * dt
